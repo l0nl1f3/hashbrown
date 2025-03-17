@@ -109,7 +109,9 @@ fn capacity_to_buckets(cap: usize) -> Option<usize> {
         // We don't bother with a table size of 2 buckets since that can only
         // hold a single element. Instead we skip directly to a 4 bucket table
         // which can hold 3 elements.
-        return Some(if cap < 4 { 4 } else { 8 });
+        // return Some(if cap < 4 { 4 } else { 8 });
+        // Modified to have better memory efficiency for smaller hashmaps
+        return Some(cap + 1);
     }
 
     // Otherwise require 1/8 buckets to be empty (87.5% load)
